@@ -1,0 +1,2 @@
+This program is designed to pull song lyrics data from the Genius API, then iterate through each word and detect all curse words. 
+It returns 'Clean' if there are no curse words and 'Explicit Lyrics Detected' if there are. It will also return a list of all curse words found in the song. 

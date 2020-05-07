@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Flask App</title>
+    
+   
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+	<li class="nav-item active">
+	  <a class="nav-link" href="#">Song Sanitizer</a>
+	</li>
+      </ul>
+    </nav>
+</head>
+<script>
+
+  function reset(){
+    setInterval('location.reload()', 1000);
+  }
+
+  function myFunction() {
+  var text1= $('#text1').val();
+  var text2= $('#text2').val();
+  $.ajax({
+      url: "/join",
+      type: "POST",
+      data: {text1:text1,
+      text2:text2}
+    }).done(function(response) {
+      var html= "<br><br><br><p> <b>&nbsp;&nbsp; RESULT : <b><p>";
+      response =response.result;
+      $.each(response,function(key,val){
+        console.log(val);
+        html+= "&nbsp;&nbsp;" + val.replace(/.(?=[A-Z])/g, '<br />')
+      });
+      html +="<br>";
+      $(".show-data").append(html);
+    });
+  };
+ 
+</script>
+<style>
+h1 {text-align: center;}
+.buttonHolder{ text-align: center; }
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+</style>
+<body>
+
+    
+  <br><br>
+  <h1>Let's find out if your song contains bad words!</h1><br><br>
+<div class="container"> 
+  <form role="form">
+    <div class="form-group">
+      <label for="song">Enter Song</label>
+      <input type="text" class="form-control" id="text1" name="text1">
+    </div>	
+
+    <div class="form-group">
+      <label for="song">Enter Singer</label>
+      <input type="text" class="form-control" id="text2" name="text2">
+    </div>
+  </form>
+  <button type="button" class="btn btn-primary" id="clicked" onclick="myFunction()">Submit</button>
+  <button type="button" class="btn btn-primary" id="clicked" onclick="reset()">Reset</button>
+</div>
+  
+  
+        
+  <div class="show-data" >
+  </div>
+</body>
+
+<!-- Footer -------------------------------- -->
+<footer id="sticky-footer" class="py-3 bg-dark text-white-50">
+  <div class="container text-center">
+    <small style="color:white;">Copyright &copy; athuvo.com</small>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script scr="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"</script>
+</html>
